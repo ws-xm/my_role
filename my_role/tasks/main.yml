@@ -1,0 +1,34 @@
+- name: install http
+  yum:
+    name: "{{web_pkg}}"
+    state: latest
+
+- name: start service
+  service:
+    name: "{{web_srv}}"
+    state: started
+    enabled: yes
+
+- name: copy config file
+  template:
+    src: servera.j2
+    dest: /etc/httpd/conf.d/servera.conf
+  notify: restart http
+
+- name: copy index.html
+  template:
+    src: index.j2
+    dest: /var/www/html/index.html
+
+- name: config firewall for http/https
+  firewalld:
+    service: "{{item}}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop:
+    - http
+    - https
+- name: debug testvar
+  debug:
+    msg: "{{testvar}}"
