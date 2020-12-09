@@ -8,14 +8,15 @@ galaxy_info:
   min_ansible_version: 2.4
   platforms:
     - name: EL
-      versions:
-        - all
+      versions:
+        - 6
+        - 7
+        - 8
     - name: Debian
-      versions:
-        - all
+      versions:
+        - all
     - name: Ubuntu
-      versions:
-        - all
-      galaxy_tags:
-        - role
-        - demo
+      versions:
+        - all
+  galaxy_tags:
+    - my_role_demo
